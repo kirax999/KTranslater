@@ -6,13 +6,17 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class KTranslaterApplyer : MonoBehaviour {
-
+    public TextAsset File;
 	// Use this for initialization
 	void Start () {
         try {
             int language = PlayerPrefs.GetInt("KtranslaterLanguage", (int)Application.systemLanguage);
             printValue(language);
-        } catch { }
+        } catch { 
+            Debug.Log("********************************************************");
+            Debug.Log(File.text);
+            Debug.Log("********************************************************");
+        }
 	}
 	
 	public class pageLanguage {
@@ -31,8 +35,7 @@ public class KTranslaterApplyer : MonoBehaviour {
     }
 
     void printValue(int nameLanguage) {
-        StreamReader reader = new StreamReader("Assets/" + SceneManager.GetActiveScene().name + "-KTranslaterJson.json");
-        string dico = reader.ReadToEnd();
+        string dico = File.text;
 
         dictionaryLanguage data = JsonConvert.DeserializeObject<dictionaryLanguage>(dico);
         foreach (var page in data.pages) {
