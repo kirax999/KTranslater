@@ -5,29 +5,30 @@ using UnityEditor.UIElements;
 using System;
 
 namespace KTranslate {  
-    public class KTranslateEditor : Editor {
-        static Button _generator;
-        static EnumField _selectedLanguage;
+    public class KTranslateEditor : EditorWindow {
+        bool _generator;
+        bool _loadLanguage;
+        SystemLanguage _selectedLanguage, systemLanguageP;
 
-        [MenuItem("Tools/Open KTranslater")]        
-        static void Init() {
-            // Each editor window contains a root VisualElement object
-            VisualElement root = new VisualElement();
+        [MenuItem("Tools/KTranslater")]
+        // Add menu item named "My Window" to the Window menu
+        public static void ShowWindow() {
+            //Show existing window instance. If one doesn't exist, make one.
+            EditorWindow.GetWindow(typeof(KTranslateEditor));
+        }
 
-            // Import UXML
-            var uxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/Editor/KTranslateEditor.uxml");
-            var uss = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Editor/KTranslateEditor.uss");
-            uxml.CloneTree(root);
-            root.styleSheets.Add(uss);
+        void OnGUI() {
+            _generator = GUILayout.Button("Generate Original File");
+            _selectedLanguage = (SystemLanguage)EditorGUILayout.EnumPopup("Language", _selectedLanguage);
+        }
 
-            _generator = root.Q<Button>("generator");
-            _selectedLanguage = root.Q<EnumField>("SelectedLanguage");
-            // A stylesheet can be added to a VisualElement.
-            // The style will be applied to the VisualElement and all of its children.
+        private void Update() {
+            if (_generator) {
+                TaptTap();
+            }
+            if (_loadLanguage) {
 
-            _generator.clickable.clicked += TaptTap;
-
-           // SetLanguageList();
+            }
         }
 
         #region methode
@@ -45,12 +46,6 @@ namespace KTranslate {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(
                 Application.dataPath + "/" + nameFile, false)) {
                 file.WriteLine(text);
-            }
-        }
-
-        static void SetLanguageList() {
-            foreach (var item in (string[])Enum.GetNames(typeof(SystemLanguage))) {
-                _selectedLanguage.Add(new Label(item));
             }
         }
         #endregion
