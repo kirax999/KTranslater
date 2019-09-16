@@ -20,6 +20,7 @@ namespace KTranslate {
         SystemLanguage _selectedLanguage, systemLanguageP;
 
         List<string> Keys = new List<string>();
+        //Dictionary<string, List<string>> listD = Dictionary<string, List<string>>();
 
         [MenuItem("Tools/KTranslater")]
         // Add menu item named "My Window" to the Window menu
@@ -59,10 +60,6 @@ namespace KTranslate {
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
             _keyLanguage = EditorGUILayout.BeginFoldoutHeaderGroup(_keyLanguage, "Language");
             if (_keyLanguage) {
                 _selectedLanguage = (SystemLanguage)EditorGUILayout.EnumPopup("Language", _selectedLanguage);
