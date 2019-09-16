@@ -13,6 +13,7 @@ namespace KTranslate {
         bool _keyLanguage;
         bool _loadKeys;
         bool _removeKey;
+        bool _AddKeyB;
         int _choiceAlertGenerator = -1;
         string addKey;
         TextAsset _textTranslate;
@@ -27,6 +28,7 @@ namespace KTranslate {
             EditorWindow.GetWindow(typeof(KTranslateEditor));
         }
 
+        
         void OnGUI() {
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.PrefixLabel("Translation File");
@@ -44,11 +46,17 @@ namespace KTranslate {
                 for (int i = 1; i < Keys.Count; i++) {
                     EditorGUILayout.BeginHorizontal();
                     Keys[i] = EditorGUILayout.DelayedTextField(Keys[i]);
-                    _generator = GUILayout.Button("Remove");
+                    _removeKey = GUILayout.Button("Remove");// {
+                    /*
+                        RemoveKey(Keys[i]);
+                    }
+                    */
                     EditorGUILayout.EndHorizontal();
                 }
+                EditorGUILayout.BeginHorizontal();
                 addKey = EditorGUILayout.DelayedTextField(addKey);
-                _generator = GUILayout.Button("Add");
+                _AddKeyB = GUILayout.Button("Add");
+                EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
             EditorGUILayout.Space();
@@ -82,12 +90,16 @@ namespace KTranslate {
                 }
             }
             if (_loadKeys) {
-                loadKeys();
+                LoadKeys();
+                Repaint();
+            }
+            if (_AddKeyB) {
+                AddKeys(addKey);
             }
         }
 
         #region methode
-        void loadKeys() {
+        void LoadKeys() {
             if (_textTranslate != null) {
                 Keys.Clear();
                 List<string> line = new List<string>();
@@ -115,6 +127,24 @@ namespace KTranslate {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(
                 Application.dataPath + "/" + nameFile, false)) {
                 file.WriteLine(text);
+            }
+        }
+        void RemoveKey(string key) {
+
+        }
+        void AddKeys(string key) {
+            if (key.Length > 0 && _textTranslate != null) {
+                var keyWrite = "$(" + key + ")";
+                for (int i = 0; i < Enum.GetNames(typeof(SystemLanguage)).Length; i++) {
+                    keyWrite += ",";
+                }
+
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(
+                    AssetDatabase.GetAssetPath(_textTranslate), true)) {
+                    file.Write("\n" + keyWrite);
+                    addKey = "";
+                    Repaint();
+                }
             }
         }
         #endregion
