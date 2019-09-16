@@ -11,10 +11,11 @@ namespace KTranslate {
         bool _loadLanguage;
         bool _keyMenu;
         bool _keyLanguage;
+        bool _confirmSave;
         int _choiceAlertGenerator = -1;
         string _newKey;
         TextAsset _textTranslate;
-        SystemLanguage _selectedLanguage, systemLanguageP;
+        SystemLanguage _selectedLanguage = SystemLanguage.English;
 
         List<string> Keys = new List<string>();
         Dictionary<string, List<string>> _dicTranslate = new Dictionary<string, List<string>>();
@@ -23,7 +24,7 @@ namespace KTranslate {
         // Add menu item named "My Window" to the Window menu
         public static void ShowWindow() {
             //Show existing window instance. If one doesn't exist, make one.
-            EditorWindow.GetWindow(typeof(KTranslateEditor));
+            EditorWindow.GetWindow(typeof(KTranslateEditor), false, "KTranslate");
         }
 
         
@@ -40,11 +41,6 @@ namespace KTranslate {
             EditorGUILayout.Space();
             _keyMenu = EditorGUILayout.BeginFoldoutHeaderGroup(_keyMenu, "List keys");
             if (_keyMenu) {
-                if (GUILayout.Button("Load Keys")) {
-                    LoadFile();
-                    LoadKeys();
-                    Repaint();
-                }
                 for (int i = 0; i < Keys.Count; i++) {
                     EditorGUILayout.BeginHorizontal();
                     Keys[i] = EditorGUILayout.TextField(Keys[i]);
@@ -63,9 +59,31 @@ namespace KTranslate {
             EditorGUILayout.EndFoldoutHeaderGroup();
             _keyLanguage = EditorGUILayout.BeginFoldoutHeaderGroup(_keyLanguage, "Language");
             if (_keyLanguage) {
+                EditorGUI.BeginChangeCheck();
                 _selectedLanguage = (SystemLanguage)EditorGUILayout.EnumPopup("Language", _selectedLanguage);
+
+                foreach (var item in _dicTranslate) {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.LabelField(item.Key);
+                    item.Value[(int)_selectedLanguage] = EditorGUILayout.TextField(item.Value[(int)_selectedLanguage]);
+                    EditorGUILayout.EndHorizontal();
+                }
             }
-            EditorGUILayout.EndFoldoutHeaderGroup();
+            if (GUILayout.Button("Load Keys")) {
+                LoadFile();
+                LoadKeys();
+                Repaint();
+            }
+            EditorGUILayout.BeginHorizontal();
+            _confirmSave = EditorGUILayout.Toggle("Confirm Save", _confirmSave);
+            if (GUILayout.Button("Save")) {
+                if (_confirmSave) {
+                    Save();
+                } else {
+                    EditorUtility.DisplayDialog("Error", "Please check toggle for confirm data save", "ok");
+                }
+            }
+            EditorGUILayout.EndHorizontal();
         }
 
         private void Update() {
@@ -128,7 +146,6 @@ namespace KTranslate {
             WriteFile("TrDictionary.csv", languageList);
         }
         static void WriteFile(string nameFile, string text) {
-            Debug.Log("write file : " + Application.dataPath + "/" + nameFile);
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(
                 Application.dataPath + "/" + nameFile, false)) {
                 file.WriteLine(text);
@@ -148,9 +165,11 @@ namespace KTranslate {
                 }
                 _dicTranslate.Add(keyWrite, keyList);
                 _newKey = "";
-                Debug.Log(_newKey + "+" + keyWrite);
                 LoadKeys();
             }
+        }
+        void Save() {
+
         }
         #endregion
     }
