@@ -1,55 +1,52 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class KTranslaterApplyer : MonoBehaviour {
-    public TextAsset File;
-	// Use this for initialization
-	void Start () {
-        try {
-            int language = PlayerPrefs.GetInt("KtranslaterLanguage", (int)Application.systemLanguage);
-            printValue(language);
-        } catch { 
-            Debug.Log("********************************************************");
-            Debug.Log(File.text);
-            Debug.Log("********************************************************");
-        }
-	}
-	
-	public class pageLanguage {
-		public UnityEngine.SystemLanguage language;
-		public string nameLanguage;
-		public Dictionary<string, string> words = new Dictionary<string, string>();
-	}
+namespace KTranslate {
+    public class KTranslaterApplyer : MonoBehaviour {
+        [SerializeField] TextAsset _textTranslate;
+        [SerializeField] private SystemLanguage _language = SystemLanguage.English;
 
-	public class dictionaryLanguage {
-		public List<pageLanguage> pages = new List<pageLanguage>();
-	}
+        Dictionary<string, string> _dicTranslate = new Dictionary<string, string>();
 
-    void changeManualLanguage(UnityEngine.SystemLanguage language) {
-        PlayerPrefs.SetInt("KtranslaterLanguage", (int)language);
-        PlayerPrefs.Save();
-    }
+        private void Awake() {
+            if (PlayerPrefs.HasKey("KtranslaterLanguage")) {
+                _language = (SystemLanguage) PlayerPrefs.GetInt("KtranslaterLanguage");
+            }
+            int numberColumn = GetColumnNumber();
+            if (numberColumn != -1) {
+                string[] fileLine = _textTranslate.text.Split('\n');
 
-    void printValue(int nameLanguage) {
-        string dico = File.text;
-
-        dictionaryLanguage data = JsonConvert.DeserializeObject<dictionaryLanguage>(dico);
-        foreach (var page in data.pages) {
-            if (page.nameLanguage == ((UnityEngine.SystemLanguage)nameLanguage).ToString()) {
-                foreach (GameObject oneTrans in UnityEngine.Object.FindObjectsOfType<GameObject>()) {
-                    if (oneTrans != null) {
-                        if (oneTrans.GetComponent<Text>() != null)
-                            if (oneTrans.GetComponent<Text>().text.IndexOf("$") == 0) {
-                                string t = page.words[key: oneTrans.GetComponent<Text>().text];
-                                oneTrans.GetComponent<Text>().text = t;
-                            }
+                for (int i = 1; i < fileLine.Length; i++) {
+                    string[] line = fileLine[i].Split(',');
+                    if (line.Length > 1) {
+                        _dicTranslate.Add(KTranslaterUtils.ClearString(line[0]),
+                            KTranslaterUtils.ClearString(line[numberColumn]));
                     }
                 }
             }
+        }
+        void ChangeManualLanguage(UnityEngine.SystemLanguage language) {
+            PlayerPrefs.SetInt("KtranslaterLanguage", (int)language);
+            PlayerPrefs.Save();
+        }
+        int GetColumnNumber() {
+            int target = -1;
+            
+            string[] fileLine = _textTranslate.text.Split('\n');
+            string[] ListLanguage = fileLine[0].Split(',');
+            for (int i = 0; i < ListLanguage.Length; i++) {
+                if (KTranslaterUtils.ClearString(ListLanguage[i]) == _language.ToString()) {
+                    target = i;
+                }
+            }
+
+            return target;
+        }
+        string GetString(string key) {
+            string result = null;
+            
+            result = _dicTranslate[key];
+            return result;
         }
     }
 }

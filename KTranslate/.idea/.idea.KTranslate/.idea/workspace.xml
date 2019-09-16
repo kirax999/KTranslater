@@ -12,10 +12,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslaterInterface.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Plugin/dictionary.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Editor/KTranslateEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2CE23092-8A98-496B-A12C-A183760FB5F6/47/2623355b/SystemLanguage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/KTranslaterUtils.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -23,6 +22,9 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslaterInterface.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate.cs" />
+        <option value="$PROJECT_DIR$/Assets/Editor/KTranslateEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/KTranslaterUtils.cs" />
+        <option value="$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" />
       </list>
     </option>
   </component>
@@ -33,7 +35,7 @@
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -55,10 +57,10 @@
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="1956">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" pid="11692">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="1956" />
+      <option name="pid" value="11692" />
       <option name="userSelectedPid" value="false" />
       <method v="2" />
     </configuration>
@@ -74,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568232021412</updated>
       <workItem from="1568232025067" duration="16180000" />
+      <workItem from="1568653418778" duration="15587000" />
     </task>
     <servers />
   </component>
@@ -87,7 +90,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -106,14 +111,7 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Plugin/KTranslate.cs</url>
           <line>17</line>
-          <properties documentPath="$PROJECT_DIR$/Assets/Plugin/KTranslate.cs" initialLine="17">
-            <startOffsets>
-              <option value="535" />
-            </startOffsets>
-            <endOffsets>
-              <option value="557" />
-            </endOffsets>
-          </properties>
+          <properties documentPath="$PROJECT_DIR$/Assets/Plugin/KTranslate.cs" initialLine="17" />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
