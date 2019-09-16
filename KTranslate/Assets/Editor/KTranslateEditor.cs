@@ -11,16 +11,13 @@ namespace KTranslate {
         bool _loadLanguage;
         bool _keyMenu;
         bool _keyLanguage;
-        bool _loadKeys;
-        bool _removeKey;
-        bool _AddKeyB;
         int _choiceAlertGenerator = -1;
-        string addKey;
+        string _newKey;
         TextAsset _textTranslate;
         SystemLanguage _selectedLanguage, systemLanguageP;
 
         List<string> Keys = new List<string>();
-        //Dictionary<string, List<string>> listD = Dictionary<string, List<string>>();
+        Dictionary<string, List<string>> _dicTranslate = new Dictionary<string, List<string>>();
 
         [MenuItem("Tools/KTranslater")]
         // Add menu item named "My Window" to the Window menu
@@ -43,20 +40,24 @@ namespace KTranslate {
             EditorGUILayout.Space();
             _keyMenu = EditorGUILayout.BeginFoldoutHeaderGroup(_keyMenu, "List keys");
             if (_keyMenu) {
-                _loadKeys = GUILayout.Button("Load Keys");
-                for (int i = 1; i < Keys.Count; i++) {
+                if (GUILayout.Button("Load Keys")) {
+                    LoadFile();
+                    LoadKeys();
+                    Repaint();
+                }
+                for (int i = 0; i < Keys.Count; i++) {
                     EditorGUILayout.BeginHorizontal();
-                    Keys[i] = EditorGUILayout.DelayedTextField(Keys[i]);
-                    _removeKey = GUILayout.Button("Remove");// {
-                    /*
+                    Keys[i] = EditorGUILayout.TextField(Keys[i]);
+                    if (GUILayout.Button("Remove")) {
                         RemoveKey(Keys[i]);
                     }
-                    */
                     EditorGUILayout.EndHorizontal();
                 }
                 EditorGUILayout.BeginHorizontal();
-                addKey = EditorGUILayout.DelayedTextField(addKey);
-                _AddKeyB = GUILayout.Button("Add");
+                _newKey = EditorGUILayout.TextField(_newKey);
+                if (GUILayout.Button("Add")) {
+                    AddKeys();
+                }
                 EditorGUILayout.EndHorizontal();
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
@@ -86,27 +87,34 @@ namespace KTranslate {
                         break;
                 }
             }
-            if (_loadKeys) {
-                LoadKeys();
-                Repaint();
-            }
-            if (_AddKeyB) {
-                AddKeys(addKey);
-            }
         }
 
         #region methode
+        void LoadFile() {
+            _dicTranslate.Clear();
+
+            if (_textTranslate != null) {
+                var fileLine = _textTranslate.text.Split('\n');
+                for (int target = 1; target < fileLine.Length; target++) {
+                    var item = new List<string>();
+                    string[] words = fileLine[target].Split(',');
+                    for (int i = 1; i < words.Length; i++) {
+                        string word = words[i];
+                        if (word.Length > 0 && word[0] == '"') {
+                            word = word.Remove(0, 1);
+                            word = word.Remove(word.Length - 1, 1);
+                        }
+                        item.Add(word);
+                    }
+                    _dicTranslate.Add(words[0], item);
+                }
+            }
+        }
         void LoadKeys() {
             if (_textTranslate != null) {
                 Keys.Clear();
-                List<string> line = new List<string>();
-                line.Clear();
-
-                foreach (var VARIABLE in _textTranslate.text.Split('\n')) {
-                    line.Add(VARIABLE);
-                }
-                for (int i = 0; i < line.Count; i++) {
-                    Keys.Add(line[i].Split(',')[0]);
+                foreach (string name in _dicTranslate.Keys) {
+                    Keys.Add(name);
                 }
                 Repaint();
             }
@@ -127,21 +135,21 @@ namespace KTranslate {
             }
         }
         void RemoveKey(string key) {
-
+            _dicTranslate.Remove(key);
+            LoadKeys();
+            Repaint();
         }
-        void AddKeys(string key) {
-            if (key.Length > 0 && _textTranslate != null) {
-                var keyWrite = "$(" + key + ")";
+        void AddKeys() {
+            if (_newKey.Length > 0 && _textTranslate != null) {
+                string keyWrite = "$(" + _newKey + ")";
+                List<string> keyList = new List<string>();
                 for (int i = 0; i < Enum.GetNames(typeof(SystemLanguage)).Length; i++) {
-                    keyWrite += ",";
+                    keyList.Add("");
                 }
-
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(
-                    AssetDatabase.GetAssetPath(_textTranslate), true)) {
-                    file.Write("\n" + keyWrite);
-                    addKey = "";
-                    Repaint();
-                }
+                _dicTranslate.Add(keyWrite, keyList);
+                _newKey = "";
+                Debug.Log(_newKey + "+" + keyWrite);
+                LoadKeys();
             }
         }
         #endregion
