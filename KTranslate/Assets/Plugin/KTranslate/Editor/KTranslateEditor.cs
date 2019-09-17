@@ -12,7 +12,7 @@ namespace KTranslate {
         int _choiceAlertGenerator = -1;
         string _newKey;
         TextAsset _textTranslate;
-        SystemLanguage _selectedLanguage = SystemLanguage.English;
+        int _selectedLanguage;
 
         List<string> Keys = new List<string>();
         List<string> Language = new List<string>();
@@ -61,14 +61,14 @@ namespace KTranslate {
             _keyLanguage = EditorGUILayout.BeginFoldoutHeaderGroup(_keyLanguage, "Language");
             if (_keyLanguage) {
                 EditorGUI.BeginChangeCheck();
-                _selectedLanguage = (SystemLanguage)EditorGUILayout.EnumPopup("Language", _selectedLanguage);
+                _selectedLanguage = EditorGUILayout.Popup("Language", _selectedLanguage, Language.ToArray());
 
                 foreach (var item in _dicTranslate) {
                     if (item.Key.Length > 0) {
                         EditorGUILayout.BeginHorizontal();
                         EditorGUILayout.LabelField(item.Key);
-                        item.Value[(int) _selectedLanguage] =
-                            EditorGUILayout.TextField(item.Value[(int) _selectedLanguage]);
+                        item.Value[_selectedLanguage] =
+                            EditorGUILayout.TextField(item.Value[_selectedLanguage]);
                         EditorGUILayout.EndHorizontal();
                     }
                 }
@@ -97,6 +97,7 @@ namespace KTranslate {
                     case 0:
                         GenerateFile();
                         Debug.Log("File Generate");
+                        _choiceAlertGenerator = -1;
                         break;
                     default:
                         break;
@@ -110,9 +111,11 @@ namespace KTranslate {
 
             if (_textTranslate != null) {
                 var fileLine = _textTranslate.text.Split('\n');
+                var langLine = fileLine[0].Split(',');
                 Language.Clear();
-                foreach (var VARIABLE in fileLine[0].Split(',')) {
-                    Language.Add(KTranslaterUtils.ClearString(VARIABLE));
+
+                for (int target = 1; target < langLine.Length; target++) {
+                    Language.Add(KTranslaterUtils.ClearString(langLine[target]));
                 }
 
                 for (int target = 1; target < fileLine.Length; target++) {

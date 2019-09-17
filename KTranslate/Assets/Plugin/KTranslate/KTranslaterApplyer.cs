@@ -45,11 +45,10 @@ namespace KTranslate {
                     target = i;
                 }
             }
-
             return target;
         }
         public static string GetString(string key) {
-            string result = null;
+            string result = "Please define value in dictionary";
             
             result = _dicTranslate[key];
             return result;
