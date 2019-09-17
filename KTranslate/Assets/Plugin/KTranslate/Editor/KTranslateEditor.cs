@@ -142,7 +142,7 @@ namespace KTranslate {
                 Repaint();
             }
         }
-        static void GenerateFile() {
+        void GenerateFile() {
             string languageList = "Key";
 
             for (int i = 0; i < Enum.GetNames(typeof(SystemLanguage)).Length; i++) {
@@ -150,7 +150,7 @@ namespace KTranslate {
             }
             WriteFile(languageList);
         }
-        static void WriteFile(string text, string nameFile = null) {
+        static string WriteFile(string text, string nameFile = null) {
             if (nameFile == null) {
                 nameFile = Application.dataPath + "/" + "TrDictionary.csv";
             }
@@ -159,6 +159,8 @@ namespace KTranslate {
                 nameFile, false)) {
                 file.WriteLine(text);
             }
+
+            return nameFile;
         }
         void RemoveKey(string key) {
             _dicTranslate.Remove(key);
