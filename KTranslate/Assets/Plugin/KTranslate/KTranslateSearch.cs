@@ -10,7 +10,6 @@ namespace KTranslate {
 
         void Start() {
             var targetText = this.GetComponent<Text>();
-
             targetText.text = KTranslate.GetString(targetText.text);
         }
 

@@ -180,7 +180,7 @@ namespace KTranslate {
             }
         }
         void Save() {
-            var textFile = "";
+            var textFile = "Key,";
             for (int i = 0; i < Language.Count; i++) {
                 textFile += "\"" + Language[i] + "\"";
                 if (i < Language.Count - 1) 

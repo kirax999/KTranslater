@@ -18,6 +18,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2CE23092-8A98-496B-A12C-A183760FB5F6/47/2623355b/SystemLanguage.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://D:/Unity/2019.2.5f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Text.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -28,10 +29,10 @@
         <option value="$PROJECT_DIR$/Assets/KTranslaterUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslater.cs" />
-        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateUtils.cs" />
-        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" />
       </list>
     </option>
   </component>
@@ -83,7 +84,8 @@
       <option name="presentableId" value="Default" />
       <updated>1568232021412</updated>
       <workItem from="1568232025067" duration="16180000" />
-      <workItem from="1568653418778" duration="17555000" />
+      <workItem from="1568653418778" duration="19563000" />
+      <workItem from="1568756064453" duration="614000" />
     </task>
     <servers />
   </component>
