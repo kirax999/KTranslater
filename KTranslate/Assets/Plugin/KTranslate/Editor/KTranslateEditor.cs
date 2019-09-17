@@ -18,7 +18,7 @@ namespace KTranslate {
         List<string> Language = new List<string>();
         Dictionary<string, List<string>> _dicTranslate = new Dictionary<string, List<string>>();
 
-        [MenuItem("Tools/KTranslater")]
+        [MenuItem("Tools/KTranslate")]
         public static void ShowWindow() {
             //Show existing window instance. If one doesn't exist, make one.
             EditorWindow.GetWindow(typeof(KTranslateEditor), false, "KTranslate");
@@ -115,7 +115,7 @@ namespace KTranslate {
                 Language.Clear();
 
                 for (int target = 1; target < langLine.Length; target++) {
-                    Language.Add(KTranslaterUtils.ClearString(langLine[target]));
+                    Language.Add(KTranslateUtils.ClearString(langLine[target]));
                 }
 
                 for (int target = 1; target < fileLine.Length; target++) {
@@ -124,11 +124,11 @@ namespace KTranslate {
                         string[] words = fileLine[target].Split(',');
                         if (words[0] != null && words[0] != "") {
                             for (int i = 1; i < words.Length; i++) {
-                                string word = KTranslaterUtils.ClearString(words[i]);
+                                string word = KTranslateUtils.ClearString(words[i]);
                                 item.Add(word);
                             }
                         }
-                        _dicTranslate.Add(KTranslaterUtils.ClearString(words[0]), item);
+                        _dicTranslate.Add(KTranslateUtils.ClearString(words[0]), item);
                     }
                 }
             }

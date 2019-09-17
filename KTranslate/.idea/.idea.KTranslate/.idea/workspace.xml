@@ -27,10 +27,11 @@
         <option value="$PROJECT_DIR$/Assets/Editor/KTranslateEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/KTranslaterUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslater.cs" />
-        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" />
         <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateUtils.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" />
       </list>
     </option>
   </component>
@@ -82,7 +83,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568232021412</updated>
       <workItem from="1568232025067" duration="16180000" />
-      <workItem from="1568653418778" duration="17023000" />
+      <workItem from="1568653418778" duration="17555000" />
     </task>
     <servers />
   </component>

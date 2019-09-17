@@ -1,5 +1,5 @@
 ﻿namespace KTranslate {
-    public class KTranslaterUtils
+    public class KTranslateUtils
     {
         public static string ClearString(string item) {
             if (item.Length > 0 && item[0] == '"') {

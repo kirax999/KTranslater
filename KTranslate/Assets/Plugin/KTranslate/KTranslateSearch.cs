@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KTranslaterSearch : MonoBehaviour {
-    private void Awake() {
-    }
-    void Start() {
-        var targetText = this.GetComponent<Text>();
+namespace KTranslate {
+    public class KTranslateSearch : MonoBehaviour
+    {
+        private void Awake() { }
 
-        targetText.text = KTranslate.KTranslate.GetString(targetText.text);
-    }
+        void Start() {
+            var targetText = this.GetComponent<Text>();
 
-    // Update is called once per frame
-    void Update() {
-        
+            targetText.text = KTranslate.GetString(targetText.text);
+        }
+
+        // Update is called once per frame
+        void Update() { }
     }
 }

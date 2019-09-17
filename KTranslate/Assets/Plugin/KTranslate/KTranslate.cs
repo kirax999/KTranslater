@@ -21,8 +21,8 @@ namespace KTranslate {
                     for (int i = 1; i < fileLine.Length; i++) {
                         string[] line = fileLine[i].Split(',');
                         if (line.Length > 1) {
-                            _dicTranslate.Add(KTranslaterUtils.ClearString(line[0]),
-                                KTranslaterUtils.ClearString(line[numberColumn]));
+                            _dicTranslate.Add(KTranslateUtils.ClearString(line[0]),
+                                KTranslateUtils.ClearString(line[numberColumn]));
                         }
                     }
                 }
@@ -41,7 +41,7 @@ namespace KTranslate {
             string[] fileLine = _textTranslate.text.Split('\n');
             string[] ListLanguage = fileLine[0].Split(',');
             for (int i = 0; i < ListLanguage.Length; i++) {
-                if (KTranslaterUtils.ClearString(ListLanguage[i]) == _language.ToString()) {
+                if (KTranslateUtils.ClearString(ListLanguage[i]) == _language.ToString()) {
                     target = i;
                 }
             }
