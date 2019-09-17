@@ -12,10 +12,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Editor/KTranslateEditor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.prefab" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateUtils.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2CE23092-8A98-496B-A12C-A183760FB5F6/47/2623355b/SystemLanguage.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/KTranslaterUtils.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -25,6 +27,10 @@
         <option value="$PROJECT_DIR$/Assets/Editor/KTranslateEditor.cs" />
         <option value="$PROJECT_DIR$/Assets/KTranslaterUtils.cs" />
         <option value="$PROJECT_DIR$/Assets/KTranslaterApplyer.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/Editor/KTranslateEditor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslater.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslate.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugin/KTranslate/KTranslateSearch.cs" />
       </list>
     </option>
   </component>
@@ -76,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1568232021412</updated>
       <workItem from="1568232025067" duration="16180000" />
-      <workItem from="1568653418778" duration="15587000" />
+      <workItem from="1568653418778" duration="17023000" />
     </task>
     <servers />
   </component>

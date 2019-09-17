@@ -7,18 +7,14 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Editor" t="Include">
-          <e p="KTranslateEditor.cs" t="Include" />
-        </e>
-        <e p="JsonDotNet" t="Include">
-          <e p="link.xml" t="Include" />
-        </e>
-        <e p="KTranslaterApplyer.cs" t="Include" />
-        <e p="KTranslaterUtils.cs" t="Include" />
         <e p="Plugin" t="Include">
           <e p="KTranslate" t="Include">
+            <e p="Editor" t="Include">
+              <e p="KTranslateEditor.cs" t="Include" />
+            </e>
             <e p="KTranslate.cs" t="Include" />
-            <e p="OldKTranslaterInterface.cs" t="Include" />
+            <e p="KTranslateSearch.cs" t="Include" />
+            <e p="KTranslateUtils.cs" t="Include" />
           </e>
         </e>
       </e>

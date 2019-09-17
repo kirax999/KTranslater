@@ -148,7 +148,7 @@ namespace KTranslate {
             for (int i = 0; i < Enum.GetNames(typeof(SystemLanguage)).Length; i++) {
                 languageList += "," + Enum.GetNames(typeof(SystemLanguage))[i];
             }
-            WriteFile(languageList);
+            Debug.Log(WriteFile(languageList));
         }
         static string WriteFile(string text, string nameFile = null) {
             if (nameFile == null) {
@@ -169,7 +169,7 @@ namespace KTranslate {
         }
         void AddKeys() {
             if (_newKey.Length > 0 && _textTranslate != null) {
-                string keyWrite = "$(" + _newKey + ")";
+                string keyWrite = _newKey;
                 List<string> keyList = new List<string>();
                 for (int i = 0; i < Enum.GetNames(typeof(SystemLanguage)).Length; i++) {
                     keyList.Add("");

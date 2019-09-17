@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3856b92ec1d79a4d83389242fdb8533, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textTranslate: {fileID: 4900000, guid: d0ed113542b03a74fb76507d7643fe71, type: 3}
+  _textTranslate: {fileID: 0}
   _language: 10

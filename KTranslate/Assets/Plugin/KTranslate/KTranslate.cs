@@ -1,64 +1,57 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace KTranslate {
     public class KTranslate : MonoBehaviour {
-        [SerializeField] private TextAsset _file = null;
-        public SystemLanguage _LanguageSelected = SystemLanguage.English;
+        [SerializeField] TextAsset _textTranslate = null;
+        [SerializeField] private SystemLanguage _language = SystemLanguage.English;
 
-        private List<string> _line = new List<string>();
-        private int _targetCol = -1;
-        private Dictionary<string, string> _words = new Dictionary<string, string>();
-        void Start() {
-            LoadFile();
-            SearchColumnLanguage();
-            MakeDicoKey();
-            Debug.Log(_targetCol);
-        }
+        static Dictionary<string, string> _dicTranslate = new Dictionary<string, string>();
 
-        // Update is called once per frame
-        void Update() {
-
-        }
-
-        void LoadFile() {
-            if (_file != null) {
-                _line.Clear();
-
-                foreach (var VARIABLE in _file.text.Split('\n')) {
-                    _line.Add(VARIABLE);
+        private void Awake() {
+            if (_textTranslate != null) {
+                if (PlayerPrefs.HasKey("KtranslaterLanguage")) {
+                    _language = (SystemLanguage) PlayerPrefs.GetInt("KtranslaterLanguage");
                 }
-            }
-        }
+                int numberColumn = GetColumnNumber();
+                if (numberColumn != -1) {
+                    string[] fileLine = _textTranslate.text.Split('\n');
 
-        void SearchColumnLanguage() {
-            if (_line.Count > 0) {
-                string[] words = _line[0].Split(',');
-
-                for (int i = 0; i < words.Length; i++) {
-                    if (words[i] == _LanguageSelected.ToString()) {
-                        _targetCol = i;
-                    }
-                }
-            }
-        }
-
-        void MakeDicoKey() {
-            if (_line.Count > 1 && _targetCol > -1) {
-                for (int t = 1; t < _line.Count; t++) {
-                    string[] words = _line[t].Split(',');
-                    if (words.Length >= _targetCol) {
-                        var word = words[_targetCol];
-                        if (word[0] == '"') {
-                            word = word.Remove(0, 1);
-                            word = word.Remove(word.Length - 1, 1);
+                    for (int i = 1; i < fileLine.Length; i++) {
+                        string[] line = fileLine[i].Split(',');
+                        if (line.Length > 1) {
+                            _dicTranslate.Add(KTranslaterUtils.ClearString(line[0]),
+                                KTranslaterUtils.ClearString(line[numberColumn]));
                         }
-                        _words.Add(words[0], word);
                     }
                 }
+            } else {
+                Debug.LogError("Please define dictionary file");
             }
+        }
+        void ChangeManualLanguage(UnityEngine.SystemLanguage language) {
+            PlayerPrefs.SetInt("KtranslaterLanguage", (int)language);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        int GetColumnNumber() {
+            int target = -1;
+            
+            string[] fileLine = _textTranslate.text.Split('\n');
+            string[] ListLanguage = fileLine[0].Split(',');
+            for (int i = 0; i < ListLanguage.Length; i++) {
+                if (KTranslaterUtils.ClearString(ListLanguage[i]) == _language.ToString()) {
+                    target = i;
+                }
+            }
+            return target;
+        }
+        public static string GetString(string key) {
+            string result = "Please define value in dictionary";
+            
+            result = _dicTranslate[key];
+            return result;
         }
     }
 }

@@ -9,7 +9,7 @@ public class KTranslaterSearch : MonoBehaviour {
     void Start() {
         var targetText = this.GetComponent<Text>();
 
-        targetText.text = KTranslate.KTranslaterApplyer.GetString(targetText.text);
+        targetText.text = KTranslate.KTranslate.GetString(targetText.text);
     }
 
     // Update is called once per frame
