@@ -14,6 +14,7 @@ namespace KTranslate {
         
         private void Awake() {
             if (_textTranslate != null) {
+                _dicTranslate.Clear();
                 if (PlayerPrefs.HasKey("KtranslaterLanguage")) {
                     _language = (SystemLanguage)PlayerPrefs.GetInt("KtranslaterLanguage");
                 }
@@ -69,7 +70,7 @@ namespace KTranslate {
                 
                 string[] fileLineL = _textTranslate.text.Split('\n');
                 string[] arrayLangL = fileLineL[0].Split(',');
-
+                
                 for (int i = 1; i < arrayLangL.Length; i++) {
                     listLanguage.Add(KTranslateUtils.ClearString(arrayLangL[i]));
                 }
@@ -77,8 +78,14 @@ namespace KTranslate {
                 foreach (string VARIABLE in listLanguage) {
                     _LanguageChoice.options.Add(new Dropdown.OptionData(VARIABLE));
                 }
-                _LanguageChoice.value = GetColumnNumber(_language.ToString());
+                _LanguageChoice.value = GetColumnNumber((_language - 1).ToString());
+                _LanguageChoice.onValueChanged.AddListener(delegate { DropdownValueChanged(_LanguageChoice); });
             }
+        }
+        private void DropdownValueChanged(Dropdown change) {
+            PlayerPrefs.SetInt("KtranslaterLanguage", change.value);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 }
